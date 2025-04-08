@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var viewModel = UserViewModel()
+    
+    // MARK: - Body
     var body: some View {
         UserProfileView()
+            .environmentObject(viewModel)
     }
 }
 

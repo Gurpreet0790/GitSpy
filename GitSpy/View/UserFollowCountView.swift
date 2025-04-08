@@ -8,33 +8,38 @@
 import SwiftUI
 
 struct UserFollowCountView: View {
-    @State var userNameProfile : String
-    @State var titleVal : String
-    @Binding var value : Int
-    @State var isFromFollowersList : Bool = false
     
+    // MARK: - Properties
+    let user: User
+    let titleVal: String
+    let isFromFollowersList: Bool
+    
+
+    // MARK: - Computed Properties
+    private var value: Int {
+        titleVal == Constants.followersTitle ? user.followers : user.following
+    }
+    
+    // MARK: - Body
     var body: some View {
-        VStack{
+        VStack {
             Text(titleVal)
-                .font(.title3)
-                .fontWeight(.bold)
-                .foregroundStyle(.gray)
+                .textStyle(fontSize: .title3, fontWeight: .bold, textColor: .gray)
             
             NavigationLink(
-                destination: UserFollowListView(username: userNameProfile, type: titleVal.lowercased())
+                destination: UserFollowListView(username: user.login, type: titleVal.lowercased())
             ) {
-                Text(String(value))
-                    .font(.title3)
-                    .fontWeight(.bold)
-                    .foregroundStyle(.white)
+                Text("\(value)")
+                    .textStyle(fontSize: .title3, fontWeight: .bold, textColor: .white)
             }
             .disabled(value == 0 || isFromFollowersList)
         }
-        .preferredColorScheme(.dark)
+        .themeViewStyle()
     }
 }
 
 
+// MARK: - Preview
 #Preview {
-    UserFollowCountView(userNameProfile: "Gurpreet0790", titleVal: "Followers", value: .constant(50))
+//    UserFollowCountView(username: "Gurpreet0790", titleVal: "Followers", value: .constant(50))
 }

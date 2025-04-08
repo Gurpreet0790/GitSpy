@@ -8,31 +8,31 @@
 import SwiftUI
 
 struct NoUserAvailableView: View {
+    
+    // MARK: - Body
     var body: some View {
         VStack(spacing: 20) {
-            Image(systemName: "person.crop.circle.badge.exclamationmark")
+            
+            // Displaying the image with consistent styling
+            Image(systemName: Constants.noUserAvailableImage)
                 .resizable()
-                .scaledToFit()
-                .frame(width: 80, height: 80)
-                .foregroundColor(.gray)
+                .imageStyle(width: 80, height: 80) // Apply custom style for images
             
-            Text("No GitHub User")
-                .font(.title3)
-                .fontWeight(.semibold)
-                .foregroundColor(.gray)
+            // Displaying no user available text with styling
+            Text(Constants.noUserAvailable)
+                .textStyle(fontSize: .title3, fontWeight: .semibold, textColor: .gray)
             
-            Text("Please try a different username")
-                .font(.subheadline)
-                .foregroundColor(.secondary)
+            // Displaying the error message text with styling
+            Text(Constants.errorMessage)
+                .textStyle(fontSize: .subheadline, fontWeight: .regular, textColor: .secondary)
         }
         .padding()
-        .multilineTextAlignment(.center)
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(.systemBackground).opacity(0.9))
-    
+        .noUserViewStyle()
     }
 }
 
+// MARK: - Preview
 #Preview {
     NoUserAvailableView()
 }
+
